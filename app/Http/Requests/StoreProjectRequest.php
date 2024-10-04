@@ -31,5 +31,22 @@ class StoreProjectRequest extends FormRequest
             'github' => 'required|max:255',
 
         ];
+       
+    }
+
+    public function messages(){
+            
+        return [
+             'name_project.required' => 'il nome del progetto è obbligatorio',
+             'name_project.max' => 'il nome del progetto deve essere lungo al massimo 255 caratteri',
+             'description.required' => 'la descrizione è obbligatoria',
+             'description.max' => 'la descrizione deve essere lunga al massimo 255 caratteri',
+             'name.required' => 'il nome è obbligatorio',
+             'name.max' => 'il nome deve essere lunga al massimo 255 caratteri',
+             'surname.required' => 'il cognome è obbligatorio',
+             'surname.max' => 'il cognome deve essere lungo al massimo 255 caratteri',
+             'github.required' => 'il link github è obbligatorio',
+             'surname.max' => 'il link github deve essere lungo al massimo 255 caratteri',
+         ];
     }
 }
