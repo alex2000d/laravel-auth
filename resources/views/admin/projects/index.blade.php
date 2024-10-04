@@ -31,7 +31,7 @@
                         <td>{{$project->github}}</td>
                         <td>
                             <a href="{{ route('admin.projects.show', ['project' => $project->id]) }}" class="btn btn-sm btn-primary my-2">Scopri +</a>
-                            <a href="" class="btn btn-sm btn-warning">modifica</a>
+                            <a href="{{ route('admin.projects.edit', ['project' => $project->id]) }}" class="btn btn-sm btn-warning">modifica</a>
                         </td>
                     </tr>
                 @endforeach
