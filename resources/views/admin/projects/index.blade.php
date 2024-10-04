@@ -32,6 +32,11 @@
                         <td>
                             <a href="{{ route('admin.projects.show', ['project' => $project->id]) }}" class="btn btn-sm btn-primary my-2">Scopri +</a>
                             <a href="{{ route('admin.projects.edit', ['project' => $project->id]) }}" class="btn btn-sm btn-warning">modifica</a>
+                            <form action="{{route('admin.projects.destroy', ['project' => $project->id])}}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" onclick="return confirm('sei sicuro di voler cancellare questo progetto?')" class="btn btn-sm btn-danger mt-3 delete-project">cancella</button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach
@@ -39,4 +44,5 @@
             </table>
         </div>
     </div>
+    @include('admin.projects.partials.modal_delete')
 @endsection
