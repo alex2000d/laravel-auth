@@ -29,6 +29,7 @@ class UpdateProjectRequest extends FormRequest
             'name' => 'required|max:255',
             'surname' => 'required|max:255',
             'github' => 'required|max:255',
+            'image' => 'nullable|image|max:4084',
 
         ];
        
@@ -47,6 +48,8 @@ class UpdateProjectRequest extends FormRequest
              'surname.max' => 'il cognome deve essere lungo al massimo 255 caratteri',
              'github.required' => 'il link github è obbligatorio',
              'surname.max' => 'il link github deve essere lungo al massimo 255 caratteri',
+             'image.image'=> 'il file deve essere un immagine',
+             'image.max'=> 'immagine deve essere grande al massimo 4084 kb',
          ];
     }
 }

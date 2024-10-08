@@ -15,7 +15,7 @@
                 </ul>
             </div>
         @endif
-            <form action="{{route('admin.projects.update', ['project' => $project->id])}}" method="post">
+            <form action="{{route('admin.projects.update', ['project' => $project->id])}}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="row">
@@ -23,6 +23,18 @@
                         <label for="" class="ccontrol-label">nome progetto</label>
                         <input type="text" class="form-control" name="name_project" placeholder="nome progetto" value="{{old('name_project', $project->name_project)}}">
                         @error ('name_project')
+                            <span class="text-danger">{{$message}}</span>
+                        @enderror
+                    </div>
+                    <div class="col-12 my-4">
+                        @if (Str::startsWith($project->image, 'https'))
+                        <img class="img" src="{{ $project->image }}" alt="{{$project->title}}">
+                        @else 
+                        <img class="img" src="{{asset('./storage/'.$project->image)}}" alt="{{$project->title}}">
+                        @endif
+                        <label class="mt-3" for="" class="control-label">immagine</label>
+                        <input type="file" class="form-control" name="image" placeholder="immagine" value="{{old('image', $project->image)}}">
+                        @error ('image')
                             <span class="text-danger">{{$message}}</span>
                         @enderror
                     </div>

@@ -7,6 +7,7 @@ use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ProjectController extends Controller
 {
@@ -96,6 +97,14 @@ class ProjectController extends Controller
         $form_data = $request->validated();
         $slug = project::generateSlug($form_data['name_project']);
         $form_data['slug']= $slug;
+
+        if ($request->hasFile('image')) {
+            if(Str::startsWith($project->image, 'https') === false){
+                Storage::disk('public')->delete($project->image);
+            }
+            $path = Storage::disk('public')->put('image', $form_data['image']);
+            $form_data['image'] = $path;
+        }
         $project->update($form_data);
 
         return redirect()->route('admin.projects.index');
@@ -109,6 +118,10 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        if(Str::startsWith($project->image, 'https') === false){
+            Storage::disk('public')->delete($project->image);
+        }
+        
         $project->delete();
         
         return redirect()->route('admin.projects.index');
