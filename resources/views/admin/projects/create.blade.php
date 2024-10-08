@@ -15,13 +15,20 @@
                 </ul>
             </div>
         @endif
-            <form action="{{route('admin.projects.store')}}" method="post">
+            <form action="{{route('admin.projects.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-6">
                         <label for="" class="ccontrol-label">nome progetto</label>
                         <input type="text" class="form-control" name="name_project" placeholder="nome progetto" value="{{old('name_project')}}">
                         @error ('name_project')
+                            <span class="text-danger">{{$message}}</span>
+                        @enderror
+                    </div>
+                    <div class="col-6">
+                        <label for="" class="ccontrol-label">immagine</label>
+                        <input type="file" class="form-control" name="image" placeholder="immagine" value="{{old('image')}}">
+                        @error ('image')
                             <span class="text-danger">{{$message}}</span>
                         @enderror
                     </div>

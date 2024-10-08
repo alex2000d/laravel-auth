@@ -6,6 +6,7 @@ use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -42,6 +43,14 @@ class ProjectController extends Controller
         $form_data = $request->validated();
         $slug = project::generateSlug($form_data['name_project']);
         $form_data['slug']= $slug;
+
+        if ($request->hasFile('image')) {
+            $path = Storage::disk('public')->put('image', $form_data['image']);
+            $form_data['image'] = $path;
+        }
+        else {
+            $form_data['image'] = 'https://placehold.co/600x400?text=immagine+copertina';
+        }
         $project = new Project();
            $project->fill($form_data);
         

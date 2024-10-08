@@ -16,6 +16,7 @@ class Project extends Model
         'name',
         'surname',
         'github',
+        'image',
     ];
 
    public static function generateSlug($name_project){
